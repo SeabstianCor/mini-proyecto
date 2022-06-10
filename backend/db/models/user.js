@@ -25,9 +25,12 @@ const User = sequelize.define(
     },
   },
   {
-    // Other model options go here
+    freezeTableName: true,
+    tableName: "User",
   }
 );
 
 // `sequelize.define` also returns the model
 console.log(User === sequelize.models.User); // true
+
+module.exports = User;

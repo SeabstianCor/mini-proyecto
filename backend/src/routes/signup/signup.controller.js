@@ -1,20 +1,27 @@
 const User = require("../../../db/models/user");
+const bcrypt = require("bcrypt");
 
 async function signUp(req, res) {
   // Registrar un usuario
 
-  const { username, password, role } = req.body;
+  const { username, role } = req.body;
+  const password = await bcrypt.hash(req.body.password, 10);
 
   try {
-    const user = await User.create({
-      username,
-      password,
-      role,
-    });
+    const findUser = await User.findOne({ where: { username: username } });
 
-    res.send(user);
+    if (findUser) {
+      res.json({ message: "El usuario ya existe" });
+    } else {
+      const user = await User.create({
+        username,
+        password,
+        role,
+      });
+
+      res.send(user);
+    }
   } catch (error) {
-    console.log(error);
     res.send(error);
   }
 }

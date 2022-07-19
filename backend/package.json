@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/index",
     "db": "nodemon db/index",
-    "user": "nodemon db/user"
+    "user": "nodemon db/models/product.js"
   },
   "author": "sebastian",
   "license": "ISC",

@@ -20,7 +20,9 @@ async function signIn(req, res) {
         });
       });
     } else {
-      res.send("No se pudo iniciar sesion, contraseña incorrecta");
+      res
+        .status(400)
+        .json({ message: "No se pudo iniciar sesion, contraseña incorrecta" });
     }
   } catch {
     res.status(500).send();

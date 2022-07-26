@@ -11,7 +11,7 @@ async function signUp(req, res) {
     const findUser = await User.findOne({ where: { username: username } });
 
     if (findUser) {
-      res.status(400).send("El usuario ya existe");
+      res.status(400).json({ message: "El usuario ya existe" });
     } else {
       const user = await User.create({
         username,

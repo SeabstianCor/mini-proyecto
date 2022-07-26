@@ -9,7 +9,7 @@ async function create(req, res) {
     console.log(findProduct);
 
     if (findProduct) {
-      res.send("Este producto ya existe");
+      res.status(400).json({ message: "Este producto ya existe" });
     } else {
       const product = await Product.create({
         name,
@@ -35,13 +35,14 @@ async function view(req, res) {
 }
 
 async function update(req, res) {
-  const { id, name, price, expired, category } = req.body;
+  const { id } = req.params;
+  const { name, price, expired, category } = req.body;
 
   try {
     const product = await Product.findByPk(id);
 
     if (product == null) {
-      return res.status(400).send("No se encontro el producto");
+      return res.status(400).json({ message: "No se encontro el producto" });
     } else {
       (product.name = name),
         (product.price = price),
@@ -56,14 +57,14 @@ async function update(req, res) {
 }
 
 async function remove(req, res) {
-  const { id } = req.body;
+  const { id } = req.params;
 
   try {
     const product = await Product.findByPk(id);
     console.log(product);
 
     if (product == null) {
-      return res.status(400).send("No se encontro el producto");
+      returnres.status(400).json({ message: "No se encontro el producto" });
     } else {
       await product.destroy();
       res.json({ message: "Product Deleted" });

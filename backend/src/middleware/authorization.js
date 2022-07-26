@@ -16,7 +16,7 @@ async function authorization(req, res, next) {
     }
   } catch (error) {
     console.log(error);
-    return res.send("Sin autorizacion");
+    return res.status(401).json({ message: "Sin autorizacion" });
   }
   console.log("entre aqui");
 }

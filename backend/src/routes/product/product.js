@@ -5,7 +5,7 @@ const authorization = require("../../middleware/authorization");
 
 router.get("/read", authorization, view);
 router.post("/create", authorization, create);
-router.put("/update", authorization, update);
-router.delete("/delete", authorization, remove);
+router.put("/update/:id", authorization, update);
+router.delete("/delete/:id", authorization, remove);
 
 module.exports = router;

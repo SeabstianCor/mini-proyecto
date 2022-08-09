@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 async function signUp(req, res) {
   // Registrar un usuario
 
-  const { username, role } = req.body;
+  const { username } = req.body;
   const password = await bcrypt.hash(req.body.password, 10);
 
   try {
@@ -16,7 +16,6 @@ async function signUp(req, res) {
       const user = await User.create({
         username,
         password,
-        role,
       });
 
       res.send(user);

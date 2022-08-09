@@ -14,11 +14,16 @@ async function signIn(req, res) {
 
     if (await bcrypt.compare(password, user.password)) {
       //jwt
-      jwt.sign({ userId: user.id }, "secretkey", (err, token) => {
-        res.json({
-          token,
-        });
-      });
+      jwt.sign(
+        { userId: user.id },
+        "secretkey",
+        { expiresIn: "30m" },
+        (err, token) => {
+          res.json({
+            token,
+          });
+        }
+      );
     } else {
       res
         .status(400)

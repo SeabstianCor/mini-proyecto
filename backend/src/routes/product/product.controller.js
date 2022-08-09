@@ -35,10 +35,16 @@ async function view(req, res) {
 }
 
 async function update(req, res) {
+  req.params.id = parseInt(req.params.id);
   const { id } = req.params;
   const { name, price, expired, category } = req.body;
 
   try {
+    if (typeof id === "number" && id % 1 === 0) {
+      // data is an integer
+    } else {
+      return res.status(400).json({ message: "Debe ser un numero" });
+    }
     const product = await Product.findByPk(id);
 
     if (product == null) {
@@ -57,14 +63,21 @@ async function update(req, res) {
 }
 
 async function remove(req, res) {
+  req.params.id = parseInt(req.params.id);
+
   const { id } = req.params;
 
   try {
+    if (typeof id === "number" && id % 1 === 0) {
+      // data is an integer
+    } else {
+      return res.status(400).json({ message: "Debe ser un numero" });
+    }
     const product = await Product.findByPk(id);
     console.log(product);
 
     if (product == null) {
-      returnres.status(400).json({ message: "No se encontro el producto" });
+      return res.status(400).json({ message: "No se encontro el producto" });
     } else {
       await product.destroy();
       res.json({ message: "Product Deleted" });

@@ -1,15 +1,10 @@
 const config = require("./config/index");
 const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize(
-  config.database,
-  config.username,
-  config.password,
-  {
-    host: config.host,
-    dialect: config.dialect,
-  }
-);
+const sequelize = new Sequelize("STOREADMIN", "sebastian", "root", {
+  host: "localhost",
+  dialect: "postgres",
+});
 
 try {
   sequelize.authenticate();
@@ -17,3 +12,5 @@ try {
 } catch (error) {
   console.error("Unable to connect to the database:", error);
 }
+
+module.exports = sequelize;

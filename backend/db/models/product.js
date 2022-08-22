@@ -1,8 +1,8 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const sequelize = new Sequelize("sqlite::memory:");
+const sequelize = require("../index");
 
-const User = sequelize.define(
-  "User",
+const Product = sequelize.define(
+  "Product",
   {
     // Model attributes are defined here
     id: {
@@ -10,23 +10,30 @@ const User = sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    username: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    password: {
-      type: DataTypes.STRING,
+    price: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
-    role: {
+    expired: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+    },
+    category: {
       type: DataTypes.STRING,
       allowNull: false,
     },
   },
   {
-    // Other model options go here
+    freezeTableName: true,
+    tableName: "Product",
   }
 );
 
 // `sequelize.define` also returns the model
-console.log(User === sequelize.models.User); // true
+console.log(Product === sequelize.models.Product); // true
+
+module.exports = Product;

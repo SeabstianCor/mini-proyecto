@@ -17,7 +17,7 @@ async function signIn(req, res) {
       jwt.sign(
         { userId: user.id },
         "secretkey",
-        { expiresIn: "30m" },
+        { expiresIn: "1d" },
         (err, token) => {
           res.json({
             token,

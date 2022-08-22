@@ -5,7 +5,7 @@ const { authorization, privilege } = require("../../middleware/authorization");
 
 router.get("/read", authorization, view);
 router.post("/create", authorization, create);
-router.put("/update/:id", privilege, update);
-router.delete("/delete/:id", privilege, remove);
+router.put("/update/:id", authorization, privilege, update);
+router.delete("/delete/:id", authorization, privilege, remove);
 
 module.exports = router;

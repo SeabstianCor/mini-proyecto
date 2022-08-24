@@ -7,12 +7,13 @@ function Body() {
     <Container layout="row">
       <img src="./images/illustration-mockups.svg" alt="" />
       <Container layout="column">
-        <h1>Build The Community</h1>
-        <h1>Yours Fans Will Love</h1>
+        <h1>Compra Tus Productos</h1>
+        <h1>Desde Cualquier Lugar</h1>
         <p>
-          Huddle re-imagines the way we build communities. You have a voice, but
-          so does your audience. Create connections with your users as you
-          engage in genuine discussion.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
         </p>
         <Button>Register</Button>
       </Container>

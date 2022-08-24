@@ -1,12 +1,10 @@
 import React from "react";
-import { Nav, StyledHeader, Logo } from "./style/Header.styled";
+import { Nav, StyledHeader } from "./style/Header.styled";
 
 function Header() {
   return (
     <StyledHeader>
-      <Nav>
-        <Logo src="./images/logo.svg" alt="" />
-      </Nav>
+      <Nav>{/* <Logo src="./images/logo.png" alt="" /> */}</Nav>
     </StyledHeader>
   );
 }

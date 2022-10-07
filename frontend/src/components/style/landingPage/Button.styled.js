@@ -9,12 +9,12 @@ export const Button = styled.button`
   font-weight: 700;
   padding: 15px 60px;
   background-color: white;
-  color: ${({ theme }) => theme.colors.primaryViolet};
+  color: ${({ theme }) => theme.palette.secondary};
 
   &:hover {
     opacity: 0.9;
     transform: scale(0.98);
-    background-color: ${({ theme }) => theme.colors.primaryMagenta};
+    background-color: ${({ theme }) => theme.palette.accent};
     color: white;
   }
 `;

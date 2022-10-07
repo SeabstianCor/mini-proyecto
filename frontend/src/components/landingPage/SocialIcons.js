@@ -1,5 +1,5 @@
 import React from "react";
-import { StyledIcons } from "./style/SocialIcons.styled";
+import { StyledIcons } from "../style/landingPage/SocialIcons.styled";
 import { BsFacebook, BsTwitter, BsInstagram } from "react-icons/bs";
 function SocialIcons() {
   return (

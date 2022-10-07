@@ -1,10 +1,14 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React, { useContext } from "react";
+import Header from "../components/landingPage/Header";
+import { userContext } from "../context/User/userContext";
 
 function ProductPage() {
+  const { value } = useContext(userContext);
   return (
     <div>
-      <Outlet />
+      <Header />
+      {console.log(value)}
+      product
     </div>
   );
 }

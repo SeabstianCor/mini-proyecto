@@ -20,6 +20,6 @@ export const StyledIcons = styled.div`
   a:hover {
     opacity: 0.9;
     transform: scale(0.98);
-    background-color: ${({ theme }) => theme.colors.primaryMagenta};
+    background-color: ${({ theme }) => theme.palette.accent};
   }
 `;

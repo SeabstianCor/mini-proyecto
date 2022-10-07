@@ -1,6 +1,6 @@
 import React from "react";
 import SocialIcons from "./SocialIcons";
-import { StyledFooter } from "./style/Styledfooter.styled";
+import { StyledFooter } from "../style/landingPage/Styledfooter.styled";
 
 function Footer() {
   return (

@@ -7,7 +7,7 @@ function PublicRoute() {
   const { user } = useContext(userContext);
 
   useEffect(() => {
-    if (user.isUserLogin === true) {
+    if (user.isUserLogin !== false) {
       navigate("/home", { replace: true });
     }
   });

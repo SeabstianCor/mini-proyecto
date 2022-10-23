@@ -7,10 +7,8 @@ import { userContext } from "../../context/User/userContext";
 import { Link } from "react-router-dom";
 
 function Navbar() {
-  const { setUser } = useContext(userContext);
-  function logout() {
-    setUser({ isUserLogin: false });
-  }
+  const { user, setUser } = useContext(userContext);
+
   return (
     <div>
       <Nav>
@@ -39,7 +37,9 @@ function Navbar() {
         </div>
         <section>
           <AiOutlineShopping style={{ color: "black" }} />
-          <Button onClick={logout}>Logout</Button>
+          <Button onClick={() => setUser({ ...user, isUserLogin: false })}>
+            Logout
+          </Button>
         </section>
       </Nav>
     </div>

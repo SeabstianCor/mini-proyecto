@@ -7,11 +7,10 @@ function PrivateRoute() {
   const { user } = useContext(userContext);
 
   useEffect(() => {
-    if (user.isUserLogin === false) {
+    if (user.isUserLogin !== true) {
       navigate("/signin", { replace: true });
     }
   });
-  console.log(user);
   return (
     <div>
       <Outlet />

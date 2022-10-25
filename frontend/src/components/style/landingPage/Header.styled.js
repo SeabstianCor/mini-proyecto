@@ -13,4 +13,5 @@ export const Nav = styled.nav`
 
 export const Logo = styled.img`
   padding-left: 40px;
+  width: 2.3em;
 `;

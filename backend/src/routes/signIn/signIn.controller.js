@@ -14,6 +14,7 @@ async function signIn(req, res) {
 
     if (await bcrypt.compare(password, user.password)) {
       //jwt
+      const role = user.role;
       jwt.sign(
         { userId: user.id },
         "secretkey",
@@ -21,6 +22,8 @@ async function signIn(req, res) {
         (err, token) => {
           res.json({
             token,
+            username,
+            role,
           });
         }
       );

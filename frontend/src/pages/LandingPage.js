@@ -7,7 +7,7 @@ import { theme } from "../components/style/theme";
 function LandingPage() {
   return (
     <>
-      <GlobalStyles bg={theme.palette.secondary} />
+      <GlobalStyles bg={theme.palette.primary} />
       <Header />
       <Body />
       <Footer />

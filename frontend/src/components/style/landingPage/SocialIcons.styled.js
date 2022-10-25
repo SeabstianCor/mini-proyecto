@@ -7,7 +7,7 @@ export const StyledIcons = styled.div`
   a {
     border: 2px solid #fff;
     border-radius: 25px;
-    color: #fff;
+    color: ${({ theme }) => theme.palette.secondary};
     display: inline-flex;
     align-items: center;
     justify-content: center;

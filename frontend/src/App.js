@@ -6,20 +6,21 @@ import MainRoutes from "./routes/MainRoutes";
 
 function App() {
   const [user, setUser] = useState(() => {
-    const localData = localStorage.getItem("UserState");
+    const localData = localStorage.getItem("UserData");
     return localData
       ? JSON.parse(localData)
       : {
-          isUserLogin: true,
+          isUserLogin: false,
           userData: {
             username: "string",
             userRole: "string",
+            token: "string",
           },
         };
   });
 
   useEffect(() => {
-    window.localStorage.setItem("UserState", JSON.stringify(user));
+    window.localStorage.setItem("UserData", JSON.stringify(user));
   }, [user]);
 
   return (

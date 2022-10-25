@@ -1,11 +1,10 @@
 import React from "react";
-import { StyledHeader } from "../style/landingPage/Header.styled";
-import Navigation from "../Navigation/Navigation";
+import { Logo, StyledHeader } from "../style/landingPage/Header.styled";
 
 function Header() {
   return (
     <StyledHeader>
-      <Navigation />
+      <Logo src="./images/Elixir.webp" alt="elixir"></Logo>
     </StyledHeader>
   );
 }

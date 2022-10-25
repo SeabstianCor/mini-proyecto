@@ -6,7 +6,7 @@ import { Button } from "../style/landingPage/Button.styled";
 import { userContext } from "../../context/User/userContext";
 import { Link } from "react-router-dom";
 
-function Navbar() {
+function Navbar({ showHome }) {
   const { user, setUser } = useContext(userContext);
 
   return (
@@ -24,15 +24,11 @@ function Navbar() {
             </li>
             <li>
               <Link to="/product">
-                <span>Shop</span>
+                <span>Product</span>
               </Link>
             </li>
-            <li>
-              <a href="/home">about</a>
-            </li>
-            <li>
-              <a href="/home">Contact</a>
-            </li>
+            <li>{showHome === true ? <a href="/home">About</a> : ""}</li>
+            <li>{showHome === true ? <a href="/home">Contact</a> : ""}</li>
           </List>
         </div>
         <section>

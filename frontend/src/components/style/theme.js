@@ -13,7 +13,7 @@ export const theme = {
 
   palette: {
     primary: "#ffffff",
-    secondary: "#191645",
-    accent: "#43C6aC",
+    secondary: "#42a5f5",
+    accent: "#1565c0",
   },
 };

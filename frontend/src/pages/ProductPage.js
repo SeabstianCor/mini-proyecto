@@ -1,14 +1,14 @@
-import React, { useContext } from "react";
-import Header from "../components/landingPage/Header";
-import { userContext } from "../context/User/userContext";
+import React from "react";
+import DataTable from "../components/DataTable/DataTable";
+import Navbar from "../components/Navbar/Navbar";
+import { GlobalStyles } from "../components/style/landingPage/Global";
 
 function ProductPage() {
-  const { value } = useContext(userContext);
   return (
     <div>
-      <Header />
-      {console.log(value)}
-      product
+      <GlobalStyles />
+      <Navbar />
+      <DataTable />
     </div>
   );
 }

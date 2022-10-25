@@ -9,4 +9,17 @@ export const Form = styled.form`
     background-color: ${({ theme }) => theme.palette.secondary};
     color: ${({ theme }) => theme.palette.primary};
   }
+
+  p {
+    text-decoration: underline;
+    font-size: medium;
+    padding: 0 30px;
+    margin: 5px;
+    position: absolute;
+    color: black;
+  }
+
+  a {
+    padding: 0.3em 0;
+  }
 `;

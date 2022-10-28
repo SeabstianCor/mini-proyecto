@@ -4,7 +4,7 @@ import { Nav } from "../style/navbar/Nav.styled";
 import { AiOutlineShopping } from "react-icons/ai";
 import { Button } from "../style/landingPage/Button.styled";
 import { userContext } from "../../context/User/userContext";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function Navbar({ showHome }) {
   const { user, setUser } = useContext(userContext);
@@ -27,8 +27,8 @@ function Navbar({ showHome }) {
                 <span>Product</span>
               </Link>
             </li>
-            <li>{showHome === true ? <a href="/home">About</a> : ""}</li>
-            <li>{showHome === true ? <a href="/home">Contact</a> : ""}</li>
+            <li>{showHome === true ? <NavLink to={{}}>about</NavLink> : ""}</li>
+            <li>{showHome === true ? <a href="#contact">Contact</a> : ""}</li>
           </List>
         </div>
         <section>

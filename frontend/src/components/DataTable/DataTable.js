@@ -6,7 +6,7 @@ import { userContext } from "../../context/User/userContext";
 function DataTable() {
   const { user } = useContext(userContext);
   const [post, setPost] = useState([]);
-  const token = user.userData.token;
+  const token = user.token;
 
   const fetchData = async () => {
     const res = await getProduct(token);

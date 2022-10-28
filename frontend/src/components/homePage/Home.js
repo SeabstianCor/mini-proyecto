@@ -1,5 +1,6 @@
 import React from "react";
-import { Hero } from "../style/home/Hero.styled";
+import { Hero } from "../style/homePage/Hero.styled";
+import { Button } from "../style/landingPage/Button.styled";
 
 function Home() {
   return (
@@ -7,8 +8,8 @@ function Home() {
       <h4>Trade-in-offer</h4>
       <h2> Super value deals</h2>
       <h1>On all products</h1>
-      <p>Save more with coupons &up to 70% off! </p>
-      <button>Shop Now</button>
+      <p>Save more with coupons up to 70% off! </p>
+      <Button>Shop now</Button>
     </Hero>
   );
 }

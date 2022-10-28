@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
 export const Hero = styled.section`
-  background-image: url("./images/home/tshirt-model2.jpg");
-  height: 30em;
-  width: 74.5em;
+  height: 20em;
+  width: 25.5em;
   background-size: cover;
   padding: 0 74px;
   display: flex;
@@ -17,5 +16,11 @@ export const Hero = styled.section`
 
   h1 {
     color: ${({ theme }) => theme.palette.accent};
+  }
+
+  button {
+    color: ${({ theme }) => theme.palette.secondary};
+    border: 0.02em solid ${({ theme }) => theme.palette.secondary};
+    background-color: ${({ theme }) => theme.palette.primary};
   }
 `;

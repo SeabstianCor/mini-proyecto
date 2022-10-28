@@ -39,11 +39,11 @@ function SignInPage() {
         });
         setUser({
           ...user,
+          token: fetch.data.token,
           isUserLogin: true,
           userData: {
             username: userData.username,
             userRole: fetch.data.role,
-            token: fetch.data.token,
           },
         });
       }

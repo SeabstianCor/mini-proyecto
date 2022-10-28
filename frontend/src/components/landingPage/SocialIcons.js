@@ -5,13 +5,13 @@ function SocialIcons() {
   return (
     <StyledIcons>
       <li>
-        <a href="http://localhost:3000/">
+        <a href="/">
           <BsFacebook />
         </a>
-        <a href="http://localhost:3000/">
+        <a href="/">
           <BsTwitter />
         </a>
-        <a href="http://localhost:3000/">
+        <a href="/">
           <BsInstagram />
         </a>
       </li>

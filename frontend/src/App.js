@@ -10,11 +10,11 @@ function App() {
     return localData
       ? JSON.parse(localData)
       : {
+          token: "string",
           isUserLogin: false,
           userData: {
             username: "string",
             userRole: "string",
-            token: "string",
           },
         };
   });

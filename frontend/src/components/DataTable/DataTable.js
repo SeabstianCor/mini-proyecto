@@ -1,53 +1,94 @@
-import React, { useContext, useEffect, useState } from "react";
-import { getProduct } from "../../utils/DataFetch/DataFetch";
-import MUIDataTable from "mui-datatables";
+import React, { useContext, useState } from "react";
+import { deleteProduct, updateProduct } from "../../utils/DataFetch/DataFetch";
+import MaterialTable from "material-table";
+import { Button } from "../style/landingPage/Button.styled";
+import { TableContainer } from "../style/DataTable/TableContainer.styled";
+import { VscAdd } from "react-icons/vsc";
+import CreateForm from "../Form/CreateForm";
+import { useNavigate } from "react-router-dom";
+import { getToken } from "../../utils/Token/Token";
 import { userContext } from "../../context/User/userContext";
 
-function DataTable() {
+function DataTable({ postData }) {
   const { user } = useContext(userContext);
-  const [post, setPost] = useState([]);
-  const token = user.token;
+  const role = user.userData.userRole;
 
-  const fetchData = async () => {
-    const res = await getProduct(token);
-    setPost(res.data);
-  };
+  const [active, setActive] = useState(false);
 
-  useEffect(() => {
-    fetchData();
-    // ^ Comentario para deshabilitar un warning debido a fecthData fuera del useEffect
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const navigate = useNavigate();
+  const token = getToken();
 
   const columns = [
     {
-      name: "id",
-      label: "ID",
+      title: "Id",
+      field: "id",
+      editable: "never",
     },
     {
-      name: "name",
-      label: "Nombre",
+      title: "Name",
+      field: "name",
     },
     {
-      name: "price",
-      label: "Precio",
+      title: "Price",
+      field: "price",
     },
     {
-      name: "expired",
-      label: "Expira",
+      title: "Expired",
+      field: "expired",
     },
     {
-      name: "category",
-      label: "Categoria",
+      title: "Category",
+      field: "category",
     },
   ];
 
   return (
-    <>
-      <div>
-        <MUIDataTable columns={columns} data={post} />
-      </div>
-    </>
+    <TableContainer>
+      <Button
+        onClick={() => {
+          setActive(true);
+        }}
+      >
+        <VscAdd />
+      </Button>
+      {active === true && <CreateForm setActive={setActive} />}
+      <MaterialTable
+        title="Inventario"
+        columns={columns}
+        data={postData}
+        editable={
+          role === "admin"
+            ? {
+                onRowUpdate: async (newData, oldData) => {
+                  const dataUpdate = [...postData];
+                  const index = oldData.tableData.id;
+                  dataUpdate[index] = newData;
+                  const product = newData;
+                  await updateProduct(
+                    product.id,
+                    token,
+                    product.name,
+                    product.price,
+                    product.expired,
+                    product.category
+                  );
+                  navigate(0);
+                },
+                onRowDelete: async (oldData) => {
+                  const dataDelete = [...postData];
+                  const index = oldData.tableData.id;
+                  const product = dataDelete[index];
+                  await deleteProduct(product.id, token);
+                  navigate(0);
+                },
+              }
+            : {}
+        }
+        options={{
+          actionsColumnIndex: -1,
+        }}
+      />
+    </TableContainer>
   );
 }
 

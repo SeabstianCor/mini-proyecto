@@ -22,4 +22,16 @@ export const StyledIcons = styled.div`
     transform: scale(0.98);
     background-color: ${({ theme }) => theme.palette.accent};
   }
+
+  @media (max-width: 500px) {
+    svg {
+      height: 1.5rem;
+      width: 1.5em;
+    }
+
+    li {
+      display: flex;
+      flex-direction: row;
+    }
+  }
 `;

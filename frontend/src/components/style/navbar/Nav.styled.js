@@ -4,13 +4,14 @@ export const Nav = styled.section`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px;
+  padding: 15px;
   background: #fff;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
 
   section {
     display: flex;
     align-items: center;
+    padding-right: 35px;
   }
 
   img {
@@ -23,7 +24,14 @@ export const Nav = styled.section`
     color: ${({ theme }) => theme.palette.primary};
   }
 
-  svg {
-    padding-right: 0.8em;
+  @media (max-width: 450px) {
+    display: flex;
+    section {
+      padding: 0;
+    }
+
+    button {
+      padding: 15px 25px;
+    }
   }
 `;

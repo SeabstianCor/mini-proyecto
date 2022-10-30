@@ -23,4 +23,17 @@ export const Hero = styled.section`
     border: 0.02em solid ${({ theme }) => theme.palette.secondary};
     background-color: ${({ theme }) => theme.palette.primary};
   }
+
+  @media (max-width: 800px) {
+    height: 20rem;
+    width: 20rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media (max-width: 450px) {
+    height: inherit;
+    width: inherit;
+  }
 `;

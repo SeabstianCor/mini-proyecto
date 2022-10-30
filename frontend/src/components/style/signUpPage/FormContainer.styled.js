@@ -7,15 +7,30 @@ export const FormContainer = styled.div`
   width: 300px;
   background: #fff;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: all 5s ease-out;
 
   button {
     margin-top: 30px;
   }
 
-  p {
+  svg {
+    cursor: pointer;
+    height: 1.4rem;
+    width: 1.4rem;
+  }
+
+  h3 {
     font-weight: bold;
     color: black;
     display: flex;
     justify-content: center;
+  }
+
+  p {
+    padding-left: 3.5rem;
+    font-weight: bold;
+    color: black;
+    display: flex;
+    justify-content: space-evenly;
   }
 `;

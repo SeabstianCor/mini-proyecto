@@ -59,7 +59,7 @@ function SignUpPage() {
     <>
       <GlobalStyles bg={theme.palette.primary} />
       <FormContainer>
-        <p>Sign Up</p>
+        <h3>Sign Up</h3>
         <Form onSubmit={handleOnSubmit}>
           <InputBox
             id="username"

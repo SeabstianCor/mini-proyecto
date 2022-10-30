@@ -3,24 +3,16 @@ import { ThemeProvider } from "styled-components";
 import { userContext } from "./context/User/userContext";
 import { theme } from "./components/style/theme";
 import MainRoutes from "./routes/MainRoutes";
+import {
+  getLocalStorage,
+  setLocalStorage,
+} from "./utils/LocalStorage/localStorage";
 
 function App() {
-  const [user, setUser] = useState(() => {
-    const localData = localStorage.getItem("UserData");
-    return localData
-      ? JSON.parse(localData)
-      : {
-          token: "string",
-          isUserLogin: false,
-          userData: {
-            username: "string",
-            userRole: "string",
-          },
-        };
-  });
+  const [user, setUser] = useState(getLocalStorage());
 
   useEffect(() => {
-    window.localStorage.setItem("UserData", JSON.stringify(user));
+    setLocalStorage(user);
   }, [user]);
 
   return (

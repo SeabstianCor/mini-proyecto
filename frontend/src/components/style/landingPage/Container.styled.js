@@ -18,4 +18,33 @@ export const Container = styled.div`
     font-weight: 400;
     padding-bottom: 20px;
   }
+
+  @media (max-width: 500px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+      padding: 6px 0;
+      font-size: 25px;
+    }
+
+    img {
+      padding-bottom: 70px;
+      width: 60%;
+    }
+
+    p {
+      width: 88%;
+      font-size: larger;
+      font-weight: bold;
+      padding-top: 30px;
+      text-align: center;
+    }
+
+    button {
+      padding-bottom: 0.9rem;
+    }
+  }
 `;

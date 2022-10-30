@@ -22,4 +22,10 @@ export const Form = styled.form`
   a {
     padding: 0.3em 0;
   }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;

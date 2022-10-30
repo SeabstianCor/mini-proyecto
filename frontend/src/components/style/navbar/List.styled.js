@@ -21,4 +21,10 @@ export const List = styled.ul`
   li a:hover {
     color: ${({ theme }) => theme.palette.accent};
   }
+
+  @media (max-width: 800px) {
+    li {
+      padding: 20px;
+    }
+  }
 `;

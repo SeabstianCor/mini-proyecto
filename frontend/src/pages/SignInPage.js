@@ -10,6 +10,7 @@ import { userContext } from "../context/User/userContext";
 import { postSignIn } from "../utils/DataFetch/DataFetch";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { setToken } from "../utils/Token/Token";
 
 function SignInPage() {
   const { user, setUser } = useContext(userContext);
@@ -30,7 +31,6 @@ function SignInPage() {
 
     try {
       const fetch = await postSignIn(userData.username, userData.password);
-      console.log(fetch.data);
 
       if (fetch) {
         Swal.fire({
@@ -39,13 +39,13 @@ function SignInPage() {
         });
         setUser({
           ...user,
-          token: fetch.data.token,
           isUserLogin: true,
           userData: {
             username: userData.username,
             userRole: fetch.data.role,
           },
         });
+        setToken(fetch.data.token);
       }
     } catch (error) {
       Swal.fire({
@@ -59,7 +59,7 @@ function SignInPage() {
     <ThemeProvider theme={theme}>
       <GlobalStyles bg={theme.palette.primary} />
       <FormContainer>
-        <p>Sign in</p>
+        <h3>Sign In</h3>
         <Form onSubmit={handleOnSubmit}>
           <InputBox
             id="username"

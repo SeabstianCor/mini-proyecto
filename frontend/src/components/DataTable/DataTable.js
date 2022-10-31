@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { deleteProduct, updateProduct } from "../../utils/DataFetch/DataFetch";
 import MaterialTable from "material-table";
 import { Button } from "../style/landingPage/Button.styled";
@@ -8,13 +8,13 @@ import CreateForm from "../Form/CreateForm";
 import { useNavigate } from "react-router-dom";
 import { getToken } from "../../utils/Token/Token";
 import { userContext } from "../../context/User/userContext";
+import { useToggle } from "../../utils/CustomHooks/customHooks";
 
 function DataTable({ postData }) {
   const { user } = useContext(userContext);
   const role = user.userData.userRole;
 
-  const [active, setActive] = useState(false);
-
+  const [active, { handleTrue, handleFalse }] = useToggle();
   const navigate = useNavigate();
   const token = getToken();
 
@@ -44,14 +44,10 @@ function DataTable({ postData }) {
 
   return (
     <TableContainer>
-      <Button
-        onClick={() => {
-          setActive(true);
-        }}
-      >
+      <Button onClick={handleTrue}>
         <VscAdd />
       </Button>
-      {active === true && <CreateForm setActive={setActive} />}
+      {active === true && <CreateForm setActive={handleFalse} />}
       <MaterialTable
         title="Inventario"
         columns={columns}

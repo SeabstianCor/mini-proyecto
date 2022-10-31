@@ -10,6 +10,10 @@ export const Hero = styled.section`
   align-items: flex-start;
   justify-content: center;
 
+  p {
+    opacity: 1;
+  }
+
   h4 {
     padding-bottom: 15px;
   }

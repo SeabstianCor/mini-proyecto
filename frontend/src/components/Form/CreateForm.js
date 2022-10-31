@@ -57,7 +57,7 @@ function CreateForm({ setActive }) {
       <GlobalStyles />
       <FormContainer>
         <p>
-          New Product <IoCloseSharp onClick={() => setActive(false)} />
+          New Product <IoCloseSharp onClick={() => setActive()} />
         </p>
         <Form onSubmit={handleOnSubmit}>
           <InputBox

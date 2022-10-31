@@ -7,7 +7,7 @@ export const Links = styled.nav`
     top: 80px;
     left: 0;
     right: 0;
-    background: black;
+    background: ${({ theme }) => theme.palette.secondary};
     transition: 0.2s;
     overflow: hidden;
 

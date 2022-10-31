@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { List } from "../style/navbar/List.styled";
 import { Nav } from "../style/navbar/Nav.styled";
 import { Button } from "../style/landingPage/Button.styled";
@@ -7,10 +7,12 @@ import { HashLink as Link } from "react-router-hash-link";
 import { delToken } from "../../utils/Token/Token";
 import { Hamburger, Line } from "../style/navbar/Hamburger.styled";
 import { Links } from "../style/navbar/Links.styled";
+import { useToggle } from "../../utils/CustomHooks/customHooks";
 
-function Navbar({ showHome }) {
+function Navbar({ showHome, opacity }) {
   const { user, setUser } = useContext(userContext);
-  const [active, setActive] = useState(false);
+  const [active, { handleToggle }] = useToggle();
+
   const handleLogout = () => {
     setUser({ ...user, isUserLogin: false });
     delToken();
@@ -58,7 +60,7 @@ function Navbar({ showHome }) {
       </Links>
       <section>
         <Button onClick={handleLogout}>Logout</Button>
-        <Hamburger onClick={() => setActive(!active)}>
+        <Hamburger onClick={handleToggle}>
           <Line></Line>
           <Line></Line>
           <Line></Line>

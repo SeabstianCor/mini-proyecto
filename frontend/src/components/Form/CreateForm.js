@@ -7,14 +7,17 @@ import { FormContainer } from "../style/signUpPage/FormContainer.styled";
 import { IoCloseSharp } from "react-icons/io5";
 import InputBox from "./InputBox";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
 import { getToken } from "../../utils/Token/Token";
 
-function CreateForm({ setActive }) {
-  const navigate = useNavigate();
+function CreateForm({ setActive, state }) {
   const token = getToken();
+  const [data, setData] = state;
+
+  // Find the highest ID
+  const highestId = Math.max(...data.map((user) => user.id));
 
   const [productData, setProductData] = useState({
+    id: highestId + 1,
     name: "",
     price: "",
     expired: "",
@@ -28,8 +31,6 @@ function CreateForm({ setActive }) {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    console.log(productData);
-
     try {
       await createProduct(
         token,
@@ -38,11 +39,11 @@ function CreateForm({ setActive }) {
         productData.expired,
         productData.category
       );
+      setData([...data, productData]);
       Swal.fire({
         icon: "success",
         title: "Success",
       });
-      navigate(0);
     } catch (error) {
       Swal.fire({
         icon: "error",

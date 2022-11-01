@@ -1,21 +1,26 @@
 import { useEffect, useState } from "react";
-import { getProduct } from "../DataFetch/DataFetch";
 import { getToken } from "../Token/Token";
 
-export function useFetch() {
+export function useFetch(getRequest) {
   const [post, setPost] = useState([]);
   const token = getToken();
 
-  const fetchData = async () => {
-    const res = await getProduct(token);
-    setPost(res.data);
-  };
-
   useEffect(() => {
+    async function fetchData() {
+      const res = await getRequest(token);
+      setPost(res.data);
+    }
     fetchData();
-    // ^ Comentario para deshabilitar un warning debido a fecthData fuera del useEffect
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [getRequest, token]);
+
+  // useEffect(() => {
+  //   new Promise((resolve, reject) => {
+  //     const res = getRequest(token);
+  //     resolve(res);
+  //   }).then((res) => {
+  //     setPost(res.data);
+  //   });
+  // }, [getRequest, token]);
 
   return [post];
 }

@@ -16,7 +16,6 @@ export const GlobalStyles = createGlobalStyle`
   p {
     font-family: 'Open Sans', sans-serif;
     color: black;
-    opacity:0.8;
     line-height:1.5;
     }
 

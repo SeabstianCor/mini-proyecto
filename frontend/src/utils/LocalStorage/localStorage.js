@@ -3,7 +3,7 @@ export const getLocalStorage = () => {
   return localData
     ? JSON.parse(localData)
     : {
-        isUserLogin: true,
+        isUserLogin: false,
         userData: {
           username: "string",
           userRole: "string",

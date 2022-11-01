@@ -1,22 +1,25 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { deleteProduct, updateProduct } from "../../utils/DataFetch/DataFetch";
 import MaterialTable from "material-table";
 import { Button } from "../style/landingPage/Button.styled";
 import { TableContainer } from "../style/DataTable/TableContainer.styled";
 import { VscAdd } from "react-icons/vsc";
 import CreateForm from "../Form/CreateForm";
-import { useNavigate } from "react-router-dom";
 import { getToken } from "../../utils/Token/Token";
 import { userContext } from "../../context/User/userContext";
 import { useToggle } from "../../utils/CustomHooks/customHooks";
 
 function DataTable({ postData }) {
+  const [data, setData] = useState();
   const { user } = useContext(userContext);
   const role = user.userData.userRole;
 
   const [active, { handleTrue, handleFalse }] = useToggle();
-  const navigate = useNavigate();
   const token = getToken();
+
+  useEffect(() => {
+    setData(postData);
+  }, [postData]);
 
   const columns = [
     {
@@ -47,18 +50,21 @@ function DataTable({ postData }) {
       <Button onClick={handleTrue}>
         <VscAdd />
       </Button>
-      {active === true && <CreateForm setActive={handleFalse} />}
+      {active === true && (
+        <CreateForm setActive={handleFalse} state={[data, setData]} />
+      )}
       <MaterialTable
         title="Inventario"
         columns={columns}
-        data={postData}
+        data={data}
         editable={
           role === "admin"
             ? {
                 onRowUpdate: async (newData, oldData) => {
-                  const dataUpdate = [...postData];
+                  const dataUpdate = [...data];
                   const index = oldData.tableData.id;
                   dataUpdate[index] = newData;
+                  setData([...dataUpdate]);
                   const product = newData;
                   await updateProduct(
                     product.id,
@@ -68,14 +74,14 @@ function DataTable({ postData }) {
                     product.expired,
                     product.category
                   );
-                  navigate(0);
                 },
                 onRowDelete: async (oldData) => {
-                  const dataDelete = [...postData];
+                  const dataDelete = [...data];
                   const index = oldData.tableData.id;
-                  const product = dataDelete[index];
+                  dataDelete.splice(index, 1);
+                  setData([...dataDelete]);
+                  const product = oldData;
                   await deleteProduct(product.id, token);
-                  navigate(0);
                 },
               }
             : {}

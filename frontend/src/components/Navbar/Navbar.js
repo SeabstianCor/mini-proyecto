@@ -9,7 +9,7 @@ import { Hamburger, Line } from "../style/navbar/Hamburger.styled";
 import { Links } from "../style/navbar/Links.styled";
 import { useToggle } from "../../utils/CustomHooks/customHooks";
 
-function Navbar({ showHome, opacity }) {
+function Navbar({ showHome }) {
   const { user, setUser } = useContext(userContext);
   const [active, { handleToggle }] = useToggle();
 
@@ -25,7 +25,7 @@ function Navbar({ showHome, opacity }) {
       </section>
       <Links
         height={active === false ? "0" : "450px"}
-        opacity={active === false ? "0" : "1"}
+        opacity={active === false ? "0" : "2"}
       >
         <List>
           <li>

@@ -5,18 +5,15 @@ import { userContext } from "../../context/User/userContext";
 function PublicRoute() {
   const navigate = useNavigate();
   const { user } = useContext(userContext);
+  const isAuth = user.isUserLogin;
 
   useEffect(() => {
-    if (user.isUserLogin !== false) {
+    if (isAuth) {
       navigate("/home", { replace: true });
     }
   });
 
-  return (
-    <div>
-      <Outlet />
-    </div>
-  );
+  return <Outlet />;
 }
 
 export default PublicRoute;

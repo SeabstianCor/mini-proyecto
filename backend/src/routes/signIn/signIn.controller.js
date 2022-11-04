@@ -18,7 +18,7 @@ async function signIn(req, res) {
       jwt.sign(
         { userId: user.id },
         "secretkey",
-        { expiresIn: "30d" },
+        { expiresIn: "3d" },
         (err, token) => {
           res.json({
             token,
@@ -37,4 +37,22 @@ async function signIn(req, res) {
   }
 }
 
-module.exports = signIn;
+async function verifyToken(req, res) {
+  try {
+    const bearerHeader = req.headers["authorization"];
+    if (bearerHeader !== "undefined") {
+      const bearerToken = bearerHeader.split(" ")[1];
+      jwt.verify(bearerToken, "secretkey");
+      res.json({
+        tokenExpired: false,
+        message: "jwt token is not expired",
+      });
+    }
+  } catch (error) {
+    res.json({
+      tokenExpired: true,
+      message: "jwt token expired",
+    });
+  }
+}
+module.exports = { signIn, verifyToken };

@@ -1,21 +1,25 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { List } from "../style/navbar/List.styled";
 import { Nav } from "../style/navbar/Nav.styled";
 import { Button } from "../style/landingPage/Button.styled";
 import { userContext } from "../../context/User/userContext";
 import { HashLink as Link } from "react-router-hash-link";
-import { delToken } from "../../utils/Token/Token";
 import { Hamburger, Line } from "../style/navbar/Hamburger.styled";
 import { Links } from "../style/navbar/Links.styled";
 import { useToggle } from "../../utils/CustomHooks/customHooks";
+import { navbarContext } from "../../context/Navbar/navbarContext";
 
 function Navbar({ showHome }) {
   const { user, setUser } = useContext(userContext);
+  const { setNavbar } = useContext(navbarContext);
   const [active, { handleToggle }] = useToggle();
+
+  useEffect(() => {
+    setNavbar(active);
+  }, [active, setNavbar]);
 
   const handleLogout = () => {
     setUser({ ...user, isUserLogin: false });
-    delToken();
   };
 
   return (
@@ -23,15 +27,12 @@ function Navbar({ showHome }) {
       <section>
         <img src="./images/Elixir.webp" alt="elixir"></img>
       </section>
-      <Links
-        height={active === false ? "0" : "450px"}
-        opacity={active === false ? "0" : "2"}
-      >
+      <Links height={active ? "450px" : "0"} opacity={active ? "2" : "0"}>
         <List>
           <li>
-            <a href="/home">
+            <Link to="/home">
               <span>Home</span>
-            </a>
+            </Link>
           </li>
           <li>
             <Link to="/product">

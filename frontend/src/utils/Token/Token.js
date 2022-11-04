@@ -9,3 +9,8 @@ export const setToken = (token) => {
 export const delToken = () => {
   return localStorage.removeItem("accessToken");
 };
+
+export const logout = (user, setUser) => {
+  setUser({ ...user, isUserLogin: false });
+  delToken();
+};

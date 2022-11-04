@@ -13,11 +13,7 @@ function CreateForm({ setActive, state }) {
   const token = getToken();
   const [data, setData] = state;
 
-  // Find the highest ID
-  const highestId = Math.max(...data.map((user) => user.id));
-
   const [productData, setProductData] = useState({
-    id: highestId + 1,
     name: "",
     price: "",
     expired: "",
@@ -32,14 +28,14 @@ function CreateForm({ setActive, state }) {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     try {
-      await createProduct(
+      const fetch = await createProduct(
         token,
         productData.name,
         productData.price,
         productData.expired,
         productData.category
       );
-      setData([...data, productData]);
+      setData([...data, fetch.data]);
       Swal.fire({
         icon: "success",
         title: "Success",

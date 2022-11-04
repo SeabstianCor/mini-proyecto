@@ -4,11 +4,11 @@ const User = require("../../db/models/user");
 async function authorization(req, res, next) {
   try {
     const bearerHeader = req.headers["authorization"];
-    console.log(bearerHeader);
 
     if (bearerHeader !== "undefined") {
       const bearerToken = bearerHeader.split(" ")[1];
       const auth = jwt.verify(bearerToken, "secretkey");
+      console.log(auth);
       if (auth.userId) {
         req.user = auth;
         next();

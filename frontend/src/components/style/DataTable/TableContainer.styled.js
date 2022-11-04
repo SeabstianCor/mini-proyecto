@@ -4,5 +4,5 @@ export const TableContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2rem;
-  opacity: ${({ opacity }) => opacity};
+  display: ${({ display }) => display};
 `;

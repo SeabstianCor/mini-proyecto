@@ -4,14 +4,17 @@ import { getToken } from "../Token/Token";
 export function useFetch(getRequest) {
   const [post, setPost] = useState([]);
   const token = getToken();
+  const [active, { handleToggle }] = useToggle();
+
+  const refetch = () => handleToggle();
 
   useEffect(() => {
-    async function fetchData() {
+    const fetchData = async () => {
       const res = await getRequest(token);
       setPost(res.data);
-    }
+    };
     fetchData();
-  }, [getRequest, token]);
+  }, [getRequest, token, active]);
 
   // useEffect(() => {
   //   new Promise((resolve, reject) => {
@@ -22,7 +25,7 @@ export function useFetch(getRequest) {
   //   });
   // }, [getRequest, token]);
 
-  return [post];
+  return [post, refetch];
 }
 
 export function useToggle(ininitialState = false) {

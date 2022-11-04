@@ -7,11 +7,13 @@ import { VscAdd } from "react-icons/vsc";
 import CreateForm from "../Form/CreateForm";
 import { getToken } from "../../utils/Token/Token";
 import { userContext } from "../../context/User/userContext";
+import { navbarContext } from "../../context/Navbar/navbarContext";
 import { useToggle } from "../../utils/CustomHooks/customHooks";
 
 function DataTable({ postData }) {
   const [data, setData] = useState();
   const { user } = useContext(userContext);
+  const { navbar } = useContext(navbarContext);
   const role = user.userData.userRole;
 
   const [active, { handleTrue, handleFalse }] = useToggle();
@@ -46,7 +48,7 @@ function DataTable({ postData }) {
   ];
 
   return (
-    <TableContainer>
+    <TableContainer display={navbar ? "none" : ""}>
       <Button onClick={handleTrue}>
         <VscAdd />
       </Button>

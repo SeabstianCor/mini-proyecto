@@ -67,4 +67,14 @@ export const postSignIn = async (username, password) => {
   return res;
 };
 
+export const verifyToken = async (token) => {
+  const url = "http://localhost:3000/signin/user";
+  const res = await axios.get(url, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+  return res;
+};
+
 // 4 funciones get, post, put, delete

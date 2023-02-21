@@ -1,23 +1,17 @@
-import { ThemeProvider } from "styled-components";
-import Body from "../components/Body";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import { GlobalStyles } from "../components/style/Global";
+import Body from "../components/landingPage/Body";
+import Footer from "../components/landingPage/Footer";
+import Header from "../components/landingPage/Header";
+import { GlobalStyles } from "../components/style/landingPage/Global";
+import { theme } from "../components/style/theme";
 
 function LandingPage() {
-  const theme = {
-    colors: {
-      primaryViolet: "hsl(257, 40%, 49%)",
-      primaryMagenta: "hsl(300, 69%, 71%)",
-    },
-  };
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
+    <>
+      <GlobalStyles bg={theme.palette.primary} />
       <Header />
       <Body />
       <Footer />
-    </ThemeProvider>
+    </>
   );
 }
 

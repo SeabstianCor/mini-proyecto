@@ -1,10 +1,18 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import DataTable from "../components/DataTable/DataTable";
+import Navbar from "../components/Navbar/Navbar";
+import { GlobalStyles } from "../components/style/landingPage/Global";
+import { useFetch } from "../utils/CustomHooks/customHooks";
+import { getProduct } from "../utils/DataFetch/DataFetch";
 
 function ProductPage() {
+  const [data] = useFetch(getProduct);
+
   return (
     <div>
-      <Outlet />
+      <GlobalStyles />
+      <Navbar />
+      <DataTable postData={data} />
     </div>
   );
 }

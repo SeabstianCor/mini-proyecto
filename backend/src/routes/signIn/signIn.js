@@ -4,6 +4,6 @@ const router = Router();
 const { signIn, verifyToken } = require("./signIn.controller");
 
 router.post("/", signIn);
-router.get("/user", verifyToken);
+router.get("/user", authorization, verifyToken);
 
 module.exports = router;

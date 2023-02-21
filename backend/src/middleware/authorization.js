@@ -1,5 +1,9 @@
 const jwt = require("jsonwebtoken");
 const User = require("../../db/models/user");
+const dotenv = require("dotenv");
+dotenv.config();
+
+const { SECRET_KEY } = process.env;
 
 async function authorization(req, res, next) {
   try {
@@ -7,7 +11,7 @@ async function authorization(req, res, next) {
 
     if (bearerHeader !== "undefined") {
       const bearerToken = bearerHeader.split(" ")[1];
-      const auth = jwt.verify(bearerToken, "secretkey");
+      const auth = jwt.verify(bearerToken, SECRET_KEY);
       console.log(auth);
       if (auth.userId) {
         req.user = auth;
@@ -16,7 +20,9 @@ async function authorization(req, res, next) {
     }
   } catch (error) {
     console.log(error);
-    return res.status(401).json({ message: "Sin autorizacion" });
+    return res
+      .status(401)
+      .json({ message: "Sin autorizacion", authorization: false });
   }
 }
 

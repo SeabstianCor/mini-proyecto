@@ -69,12 +69,17 @@ export const postSignIn = async (username, password) => {
 
 export const verifyToken = async (token) => {
   const url = "http://localhost:3000/signin/user";
-  const res = await axios.get(url, {
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  });
-  return res;
+  try {
+    const res = await axios.get(url, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+
+    return res;
+  } catch (error) {
+    return error.response.data;
+  }
 };
 
 // 4 funciones get, post, put, delete

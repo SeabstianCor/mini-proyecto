@@ -7,16 +7,21 @@ import {
   getLocalStorage,
   setLocalStorage,
 } from "./utils/LocalStorage/localStorage";
+// import { useFetch } from "./utils/CustomHooks/customHooks";
+// import { verifyToken } from "./utils/DataFetch/DataFetch";
 
 function App() {
   const [user, setUser] = useState(getLocalStorage());
+  const [isTokenVerified, setTokenVerified] = useState(false);
 
   useEffect(() => {
     setLocalStorage(user);
   }, [user]);
 
   return (
-    <userContext.Provider value={{ user, setUser }}>
+    <userContext.Provider
+      value={{ user, setUser, isTokenVerified, setTokenVerified }}
+    >
       <ThemeProvider theme={theme}>
         <MainRoutes />
       </ThemeProvider>

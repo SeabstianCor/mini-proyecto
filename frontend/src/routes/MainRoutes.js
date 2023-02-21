@@ -7,33 +7,48 @@ import SignUpPage from "../pages/SignUpPage";
 import PrivateRoute from "./customRoutes/PrivateRoute";
 import HomePage from "../pages/HomePage";
 import PublicRoute from "./customRoutes/PublicRoute";
+import { useContext, useEffect } from "react";
+import { userContext } from "../context/User/userContext";
+import { useFetch, verifyTokenExpired } from "../utils/CustomHooks/customHooks";
+import { verifyToken } from "../utils/DataFetch/DataFetch";
 
 function MainRoutes() {
-  return (
-    <Routes>
-      <Route element={<PublicRoute />}>
-        <Route path="/" element={<LandingPage />}></Route>
-      </Route>
+  const { user, setUser, isTokenVerified, setTokenVerified } =
+    useContext(userContext);
 
-      <Route element={<PublicRoute />}>
-        <Route path="/signup" element={<SignUpPage />}></Route>
-      </Route>
+  useEffect(() => {
+    verifyTokenExpired(setTokenVerified, user, setUser);
+  }, []);
 
-      <Route element={<PublicRoute />}>
-        <Route path="/signin" element={<SignInPage />}></Route>
-      </Route>
+  console.log(isTokenVerified);
 
-      <Route element={<PrivateRoute />}>
-        <Route path="/home" element={<HomePage />} />
-      </Route>
+  if (isTokenVerified) {
+    return (
+      <Routes>
+        <Route element={<PublicRoute />}>
+          <Route path="/" element={<LandingPage />}></Route>
+        </Route>
 
-      <Route element={<PrivateRoute />}>
-        <Route path="/product" element={<ProductPage />} />
-      </Route>
+        <Route element={<PublicRoute />}>
+          <Route path="/signup" element={<SignUpPage />}></Route>
+        </Route>
 
-      <Route path="*" element={<NotFoundPage />}></Route>
-    </Routes>
-  );
+        <Route element={<PublicRoute />}>
+          <Route path="/signin" element={<SignInPage />}></Route>
+        </Route>
+
+        <Route element={<PrivateRoute />}>
+          <Route path="/home" element={<HomePage />} />
+        </Route>
+
+        <Route element={<PrivateRoute />}>
+          <Route path="/product" element={<ProductPage />} />
+        </Route>
+
+        <Route path="*" element={<NotFoundPage />}></Route>
+      </Routes>
+    );
+  }
 }
 
 export default MainRoutes;

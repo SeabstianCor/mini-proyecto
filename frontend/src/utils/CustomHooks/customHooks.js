@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
-import { getToken } from "../Token/Token";
+import { useContext, useEffect, useState } from "react";
+import { userContext } from "../../context/User/userContext";
+import { verifyToken } from "../DataFetch/DataFetch";
+import { getToken, logout } from "../Token/Token";
 
 export function useFetch(getRequest) {
   const [post, setPost] = useState([]);
@@ -9,23 +11,23 @@ export function useFetch(getRequest) {
   const refetch = () => handleToggle();
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await getRequest(token);
-      setPost(res.data);
-    };
-    fetchData();
-  }, [getRequest, token, active]);
-
-  // useEffect(() => {
-  //   new Promise((resolve, reject) => {
-  //     const res = getRequest(token);
-  //     resolve(res);
-  //   }).then((res) => {
-  //     setPost(res.data);
-  //   });
-  // }, [getRequest, token]);
+    getRequest(token).then((res) => setPost(res.data));
+  }, [getRequest, token]);
 
   return [post, refetch];
+}
+
+export function verifyTokenExpired(setState, user, setUser) {
+  const token = getToken();
+  verifyToken(token).then((res) => {
+    console.log(res);
+    if (res.authorization === false) {
+      console.log(res.authorization);
+      logout(user, setUser);
+    }
+  });
+
+  setState(true);
 }
 
 export function useToggle(ininitialState = false) {

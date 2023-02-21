@@ -1,6 +1,10 @@
 const User = require("../../../db/models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
+dotenv.config();
+
+const { SECRET_KEY } = process.env;
 
 async function signIn(req, res) {
   //Inicio de sesion
@@ -17,8 +21,8 @@ async function signIn(req, res) {
       const role = user.role;
       jwt.sign(
         { userId: user.id },
-        "secretkey",
-        { expiresIn: "3d" },
+        SECRET_KEY,
+        { expiresIn: "8h" },
         (err, token) => {
           res.json({
             token,
@@ -38,21 +42,10 @@ async function signIn(req, res) {
 }
 
 async function verifyToken(req, res) {
-  try {
-    const bearerHeader = req.headers["authorization"];
-    if (bearerHeader !== "undefined") {
-      const bearerToken = bearerHeader.split(" ")[1];
-      jwt.verify(bearerToken, "secretkey");
-      res.json({
-        tokenExpired: false,
-        message: "jwt token is not expired",
-      });
-    }
-  } catch (error) {
-    res.json({
-      tokenExpired: true,
-      message: "jwt token expired",
-    });
-  }
+  res.json({
+    authorization: true,
+    message: "Jwt token is not expired",
+  });
 }
+
 module.exports = { signIn, verifyToken };
